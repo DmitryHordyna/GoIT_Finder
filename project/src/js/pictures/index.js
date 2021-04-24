@@ -13,6 +13,7 @@ let currentPage = 1;
 
 const preloader = preloaderFactory('.preloader');
 const bntShow = preloaderFactory('.button_more');
+const wrongText = preloaderFactory('.helper');
 
 function markup(dataSearch) {
   refs.pictureList.insertAdjacentHTML(
@@ -25,14 +26,21 @@ refs.form.addEventListener('submit', onSearch);
 refs.btnLoad.addEventListener('click', onLoadMore);
 
 function onLoadMore() {
-  console.log(currentPage);
+  wrongText.hide();
   preloader.show();
 
   API.fetchPictire(querySearch, currentPage)
     .then(({ hits }) => {
+      if (hits.length === 0) {
+        return wrongText.show();
+      }
+      if (hits.length <= 11) {
+        return markup(hits);
+      }
       markup(hits);
+      bntShow.show();
     })
-    .catch(error => error)
+    .catch(error => console.log(error))
     .finally(preloader.hide());
   currentPage++;
   return;
@@ -43,15 +51,22 @@ function onSearch(e) {
   refs.pictureList.textContent = '';
   querySearch = e.currentTarget.elements.query.value.trim();
   preloader.show();
+  wrongText.hide();
 
-  querySearch &&
-    API.fetchPictire(querySearch, currentPage)
-      .then(({ hits }) => {
-        markup(hits);
-      })
-      .catch(error => error)
-      .finally(preloader.hide());
+  API.fetchPictire(querySearch, currentPage)
+    .then(({ hits }) => {
+      if (hits.length === 0) {
+        return wrongText.show();
+      }
+      if (hits.length <= 11) {
+        return markup(hits);
+      }
+      markup(hits);
+      bntShow.show();
+    })
+    .catch(error => console.log(error))
+    .finally(preloader.hide());
   currentPage++;
-  bntShow.show();
+
   return;
 }

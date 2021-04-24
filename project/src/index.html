@@ -9,25 +9,41 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="query"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
-      <button type="submit" class="btn-search">Search</button>
-    </form>
+    <div class="helper disable">
+      <h3 class="tutorial">Sorry,wrong. Try other worlds.</h3>
+    </div>
 
+    <a class="back_to_top" title="Наверх"
+      >🧙 <br /><span class="up">up</span>
+    </a>
+
+    <section class="founder">
+      <h1 class="title">FOUNDER</h1>
+      <form class="search-form" id="search-form">
+        <input
+          class="input"
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="Search picture ..."
+        />
+        <button type="submit" class="btn-search">Magic</button>
+      </form>
+    </section>
     <section class="container">
       <ul class="gallery">
         <!-- Список <li> с карточками изображений -->
       </ul>
     </section>
     <div class="button_more disable">
-      <button type="button" class="btn-load">Load more</button>
+      <button type="button" class="btn-search btn-load">Load more</button>
     </div>
 
     <div class="preloader disable">
