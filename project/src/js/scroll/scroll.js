@@ -1,4 +1,3 @@
-/* begin begin Back to Top button  */
 (function () {
   'use strict';
 
@@ -26,4 +25,3 @@
   window.addEventListener('scroll', trackScroll);
   goTopBtn.addEventListener('click', backToTop);
 })();
-/* end begin Back to Top button  */

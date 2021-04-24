@@ -1,5 +1,4 @@
 import API from '../service/api';
-// import templatesPictures from '../../templates/listPictured.hbs';
 import templatesPictures from '../../templates/cardPictures.hbs';
 import preloaderFactory from '../prelouder/prelouder';
 
@@ -8,12 +7,15 @@ const refs = {
   form: document.querySelector('.search-form'),
   btnLoad: document.querySelector('.btn-load'),
 };
-let querySearch = '';
+let querySearch = 'cat';
 let currentPage = 1;
 
-const preloader = preloaderFactory('.preloader');
+const preloader = preloaderFactory('.loader');
 const bntShow = preloaderFactory('.button_more');
 const wrongText = preloaderFactory('.helper');
+
+refs.form.addEventListener('submit', onSearch);
+refs.btnLoad.addEventListener('click', onLoadMore);
 
 function markup(dataSearch) {
   refs.pictureList.insertAdjacentHTML(
@@ -21,9 +23,6 @@ function markup(dataSearch) {
     templatesPictures(dataSearch),
   );
 }
-
-refs.form.addEventListener('submit', onSearch);
-refs.btnLoad.addEventListener('click', onLoadMore);
 
 function onLoadMore() {
   wrongText.hide();
@@ -70,3 +69,20 @@ function onSearch(e) {
 
   return;
 }
+
+// import templatesPictures from '../../templates/listPictured.hbs';
+
+// API.fetchPictire(querySearch, currentPage)
+//   .then(({ hits }) => {
+//     if (hits.length === 0) {
+//       return wrongText.show();
+//     }
+//     if (hits.length <= 11) {
+//       return markup(hits);
+//     }
+//     markup(hits);
+//     bntShow.show();
+//     return;
+//   })
+//   .catch(error => console.log(error))
+//   .finally(preloader.hide());
