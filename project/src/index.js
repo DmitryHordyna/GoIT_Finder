@@ -1,4 +1,5 @@
 import './styles.css';
+import './css/text.css';
 import './css/tutorial.css';
 import './css/prelouder.css';
 import './css/modal.css';

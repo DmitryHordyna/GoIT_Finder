@@ -7,12 +7,13 @@ const refs = {
   form: document.querySelector('.search-form'),
   btnLoad: document.querySelector('.btn-load'),
 };
-let querySearch = 'cat';
+let querySearch = '';
 let currentPage = 1;
 
 const preloader = preloaderFactory('.loader');
 const bntShow = preloaderFactory('.button_more');
 const wrongText = preloaderFactory('.helper');
+const founderText = preloaderFactory('.about');
 
 refs.form.addEventListener('submit', onSearch);
 refs.btnLoad.addEventListener('click', onLoadMore);
@@ -25,35 +26,27 @@ function markup(dataSearch) {
 }
 
 function onLoadMore() {
-  wrongText.hide();
-  preloader.show();
-
-  API.fetchPictire(querySearch, currentPage)
-    .then(({ hits }) => {
-      if (hits.length === 0) {
-        return wrongText.show();
-      }
-      if (hits.length <= 11) {
-        return markup(hits);
-      }
-      markup(hits);
-      bntShow.show();
-    })
-    .catch(error => console.log(error))
-    .finally(preloader.hide());
-  currentPage++;
-  return;
+  featchApi(querySearch, currentPage);
 }
 
 function onSearch(e) {
   e.preventDefault();
   refs.pictureList.textContent = '';
   querySearch = e.currentTarget.elements.query.value.trim();
+
+  founderText.hide();
   preloader.show();
   wrongText.hide();
 
+  featchApi(querySearch);
+}
+
+function featchApi(querySearch) {
   API.fetchPictire(querySearch, currentPage)
     .then(({ hits }) => {
+      if (querySearch === '') {
+        return;
+      }
       if (hits.length === 0) {
         return wrongText.show();
       }
@@ -65,9 +58,8 @@ function onSearch(e) {
     })
     .catch(error => console.log(error))
     .finally(preloader.hide());
-  currentPage++;
 
-  return;
+  currentPage++;
 }
 
 // import templatesPictures from '../../templates/listPictured.hbs';

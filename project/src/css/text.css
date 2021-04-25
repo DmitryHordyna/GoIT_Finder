@@ -1,0 +1,24 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about_e {
+  margin: 0;
+  font-size: 400%;
+  cursor: pointer;
+}
+.about_title {
+  margin: 0;
+  margin-bottom: 15px;
+}
+.about_deccription {
+  margin: 0;
+  color: whitesmoke;
+}
+
+.about.disable {
+  display: none;
+}
