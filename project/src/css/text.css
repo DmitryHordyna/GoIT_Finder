@@ -22,3 +22,17 @@
 .about.disable {
   display: none;
 }
+
+.total {
+  display: block;
+  cursor: help;
+  width: 100px;
+}
+.total.disable {
+  display: none;
+}
+.total-g {
+  font-size: 80%;
+}
+.total-p {
+}

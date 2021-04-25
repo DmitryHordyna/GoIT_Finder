@@ -44,12 +44,12 @@
   opacity: 0;
   pointer-events: none;
 }
-
-.loader.disable {
+.preloader.disable {
   opacity: 0;
   pointer-events: none;
 }
-.loader {
+
+.preloader {
   /* background: #000;
   background: rgba(174, 203, 223, 0.4); */
   bottom: 0;
