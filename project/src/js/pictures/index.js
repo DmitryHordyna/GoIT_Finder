@@ -67,6 +67,7 @@ function featchApi(querySearch) {
         return wrongText.show();
       }
       if (hits.length <= 11) {
+        bntShow.hide();
         return markup(hits);
       }
       refs.totalP.textContent = total;
@@ -78,25 +79,3 @@ function featchApi(querySearch) {
 
   currentPage++;
 }
-
-// function goToButton() {
-//   window.scrollTo(0,500);
-
-// }
-
-// import templatesPictures from '../../templates/listPictured.hbs';
-
-// API.fetchPictire(querySearch, currentPage)
-//   .then(({ hits }) => {
-//     if (hits.length === 0) {
-//       return wrongText.show();
-//     }
-//     if (hits.length <= 11) {
-//       return markup(hits);
-//     }
-//     markup(hits);
-//     bntShow.show();
-//     return;
-//   })
-//   .catch(error => console.log(error))
-//   .finally(preloader.hide());
