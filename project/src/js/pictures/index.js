@@ -29,18 +29,7 @@ function markup(dataSearch) {
 
 function onLoadMore() {
   featchApi(querySearch, currentPage);
-  // window.scrollBy(0, window.innerHeight);
-  setTimeout(
-    () =>
-      window.scrollBy(
-        window.scrollBy({
-          top: window.innerHeight,
-          left: 0,
-          behavior: 'smooth',
-        }),
-      ),
-    200,
-  );
+  setTimeout(() => scrollTo(), 100);
 }
 
 function onSearch(e) {
@@ -79,3 +68,28 @@ function featchApi(querySearch) {
 
   currentPage++;
 }
+function scrollTo() {
+  let scrollHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight,
+  );
+  window.scrollTo({
+    top: scrollHeight,
+    behavior: 'smooth',
+  });
+}
+// setTimeout(
+//   () =>
+//     window.scrollTo(
+//       window.scrollBy({
+//         top: window.innerHeight,
+//         left: 0,
+//         behavior: 'smooth',
+//       }),
+//     ),
+//   200,
+// );
