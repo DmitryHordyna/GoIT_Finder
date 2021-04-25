@@ -29,6 +29,7 @@ function markup(dataSearch) {
 
 function onLoadMore() {
   featchApi(querySearch, currentPage);
+  goToButton();
 }
 
 function onSearch(e) {
@@ -65,6 +66,13 @@ function featchApi(querySearch) {
     .finally(preloader.hide());
 
   currentPage++;
+}
+
+function goToButton() {
+  if (window.pageYOffset > 0) {
+    window.scrollBy(0, 80);
+    setTimeout(goToButton, 35);
+  }
 }
 
 // import templatesPictures from '../../templates/listPictured.hbs';
