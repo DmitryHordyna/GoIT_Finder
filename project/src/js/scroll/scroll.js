@@ -1,27 +1,27 @@
-(function () {
-  'use strict';
+'use strict';
 
-  function trackScroll() {
-    var scrolled = window.pageYOffset;
-    var coords = document.documentElement.clientHeight;
+function trackScroll() {
+  const scrolled = window.pageYOffset;
+  const coords = document.documentElement.clientHeight;
 
-    if (scrolled > coords) {
-      goTopBtn.classList.add('back_to_top-show');
-    }
-    if (scrolled < coords) {
-      goTopBtn.classList.remove('back_to_top-show');
-    }
+  if (scrolled > coords) {
+    goTopBtn.classList.add('back_to_top-show');
   }
-
-  function backToTop() {
-    if (window.pageYOffset > 0) {
-      window.scrollBy(0, -80);
-      setTimeout(backToTop, 0);
-    }
+  if (scrolled < coords) {
+    goTopBtn.classList.remove('back_to_top-show');
   }
+}
 
-  var goTopBtn = document.querySelector('.back_to_top');
+function backToTop() {
+  if (window.pageYOffset > 0) {
+    window.scrollBy(0, -80);
+    setTimeout(backToTop, 0);
+  }
+}
 
-  window.addEventListener('scroll', trackScroll);
-  goTopBtn.addEventListener('click', backToTop);
-})();
+const goTopBtn = document.querySelector('.back_to_top');
+
+window.addEventListener('scroll', trackScroll);
+goTopBtn.addEventListener('click', backToTop);
+
+export default trackScroll;

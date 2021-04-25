@@ -1,7 +1,7 @@
 import API from '../service/api';
 import templatesPictures from '../../templates/cardPictures.hbs';
 import preloaderFactory from '../prelouder/prelouder';
-
+import scroll from '../scroll/scroll';
 const refs = {
   pictureList: document.querySelector('.gallery'),
   form: document.querySelector('.search-form'),
@@ -29,7 +29,18 @@ function markup(dataSearch) {
 
 function onLoadMore() {
   featchApi(querySearch, currentPage);
-  goToButton();
+  // window.scrollBy(0, window.innerHeight);
+  setTimeout(
+    () =>
+      window.scrollBy(
+        window.scrollBy({
+          top: window.innerHeight,
+          left: 0,
+          behavior: 'smooth',
+        }),
+      ),
+    200,
+  );
 }
 
 function onSearch(e) {
@@ -68,12 +79,10 @@ function featchApi(querySearch) {
   currentPage++;
 }
 
-function goToButton() {
-  if (window.pageYOffset > 0) {
-    window.scrollBy(0, 80);
-    setTimeout(goToButton, 35);
-  }
-}
+// function goToButton() {
+//   window.scrollTo(0,500);
+
+// }
 
 // import templatesPictures from '../../templates/listPictured.hbs';
 
