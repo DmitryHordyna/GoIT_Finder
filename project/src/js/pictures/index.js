@@ -27,9 +27,13 @@ function markup(dataSearch) {
   );
 }
 
-function onLoadMore() {
-  featchApi(querySearch, currentPage);
-  setTimeout(() => scrollTo(), 100);
+async function onLoadMore() {
+  const newPictures = await API.fetchPictire(querySearch, currentPage);
+
+  markup(newPictures.hits);
+
+  scrollTo();
+  currentPage++;
 }
 
 function onSearch(e) {

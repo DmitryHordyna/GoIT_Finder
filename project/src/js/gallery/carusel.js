@@ -1,5 +1,4 @@
 import preloaderFactory from '../prelouder/prelouder';
-const prelouder = preloaderFactory('.loader');
 
 const refs = {
   modal: document.querySelector('.js-lightbox'),
@@ -18,8 +17,6 @@ function onShowCard(e) {
 
   cleanPicture();
   refs.modalImg.src = e.target.id;
-
-  prelouder.hide();
 }
 
 function onKeyModalEscClose(e) {
