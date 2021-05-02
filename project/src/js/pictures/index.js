@@ -84,6 +84,7 @@ function scrollTo() {
   window.scrollTo({
     top: scrollHeight,
     behavior: 'smooth',
+    during: 1000,
   });
 }
 // setTimeout(
