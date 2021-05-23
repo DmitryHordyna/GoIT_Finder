@@ -7,6 +7,7 @@ const refs = {
   form: document.querySelector('.search-form'),
   btnLoad: document.querySelector('.btn-load'),
   totalP: document.querySelector('.total-p'),
+  sentinel: document.querySelector('#sentinel'),
 };
 
 let querySearch = '';
@@ -28,11 +29,13 @@ function markup(dataSearch) {
 }
 
 async function onLoadMore() {
+  founderText.hide();
+  preloader.show();
   const newPictures = await API.fetchPictire(querySearch, currentPage);
 
   markup(newPictures.hits);
-
-  scrollTo();
+  preloader.hide();
+  // scrollTo();
   currentPage++;
 }
 
@@ -52,6 +55,7 @@ function onSearch(e) {
 function featchApi(querySearch) {
   API.fetchPictire(querySearch, currentPage)
     .then(({ hits, total }) => {
+      console.log(hits);
       if (querySearch === '') {
         return;
       }
@@ -65,7 +69,7 @@ function featchApi(querySearch) {
       }
       refs.totalP.textContent = total;
       markup(hits);
-      bntShow.show();
+      // bntShow.show();
     })
     .catch(error => console.log(error))
     .finally(preloader.hide());
@@ -87,6 +91,22 @@ function scrollTo() {
     during: 1000,
   });
 }
+///==============! observe
+
+const onEntry = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && querySearch !== '') {
+      onLoadMore();
+    }
+  });
+};
+
+const options = {
+  rootMargin: '160px',
+};
+const observer = new IntersectionObserver(onEntry, options);
+observer.observe(refs.sentinel);
+//======!
 // setTimeout(
 //   () =>
 //     window.scrollTo(
