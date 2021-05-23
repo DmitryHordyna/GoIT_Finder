@@ -55,6 +55,7 @@ function onSearch(e) {
 function featchApi(querySearch) {
   API.fetchPictire(querySearch, currentPage)
     .then(({ hits, total }) => {
+      console.log(hits);
       if (querySearch === '') {
         return;
       }
@@ -90,18 +91,18 @@ function scrollTo() {
     during: 1000,
   });
 }
-///==============!
+///==============! observe
 
 const onEntry = entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && querySearch !== '') {
       onLoadMore();
     }
   });
 };
 
 const options = {
-  rootMargin: '150px',
+  rootMargin: '160px',
 };
 const observer = new IntersectionObserver(onEntry, options);
 observer.observe(refs.sentinel);
